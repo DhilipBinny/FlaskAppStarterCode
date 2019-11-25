@@ -7,6 +7,7 @@ CORS(app)
 
 PORT = int(os.getenv("PORT", 5000))
 
+# default GET
 @app.route("/")
 def hello():
     return "Hello World!"
@@ -51,6 +52,20 @@ def raw():
     data = request.json
     print(data)
     return jsonify(data)
+
+
+# if app not using CORS, set headers in response...
+# sample return responses....
+
+# resp = {
+#         "status": "success",
+#         "data": data
+#     }
+# return Response(json.dumps(resp), status=200, content_type="application/json", headers={ 'Access-Control-Allow-Origin': '*' })
+
+# response = jsonify(resp)
+# response.headers.add('Access-Control-Allow-Origin', '*')
+# return response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True, port=PORT)
